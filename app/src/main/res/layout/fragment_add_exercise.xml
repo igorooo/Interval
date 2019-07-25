@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             tools:context=".AddExerciseFragment">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_exercise"
+            android:textSize="@dimen/headingTextSize"
+            android:layout_gravity="center"/>
+
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spaceHeight"/>
+
+    <EditText
+            android:id="@+id/EditText_exercise_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/bigTextSize"
+            android:hint="@string/exercise_name_hint"/>
+
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/affects"
+            android:textSize="@dimen/normalTextSize"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+
+            <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <RadioButton
+                        android:id="@+id/chest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chest"
+                        android:textSize="@dimen/listTextSize"/>
+                <RadioButton
+                        android:id="@+id/back"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/back"
+                        android:textSize="@dimen/listTextSize"/>
+                <RadioButton
+                        android:id="@+id/legs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/legs"
+                        android:textSize="@dimen/listTextSize"/>
+                <RadioButton
+                        android:id="@+id/abs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/abs"
+                        android:textSize="@dimen/listTextSize"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+
+            <RadioButton
+                    android:id="@+id/biceps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/biceps"
+                    android:textSize="@dimen/listTextSize"/>
+            <RadioButton
+                    android:id="@+id/triceps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triceps"
+                    android:textSize="@dimen/listTextSize"/>
+            <RadioButton
+                    android:id="@+id/shoulders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shoulders"
+                    android:textSize="@dimen/listTextSize"/>
+            <RadioButton
+                    android:id="@+id/cardio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cardio"
+                    android:textSize="@dimen/listTextSize"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+        <ImageView
+                android:id="@+id/ImageView_color"
+                android:layout_gravity="center"
+                android:src="@drawable/color_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+
+
+        <ProgressBar
+                android:id="@+id/ProgressBar_color"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/normalProgressBar"
+                android:layout_weight="5"/>
+
+
+    </LinearLayout>
+
+
+
+    <ImageButton
+            android:id="@+id/Button_save_exercise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:background="@drawable/ic_save"/>
+
+</LinearLayout>
