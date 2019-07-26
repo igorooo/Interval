@@ -126,8 +126,8 @@
                 android:layout_weight="5"/>
 
 
-        <ProgressBar
-                android:id="@+id/ProgressBar_color"
+        <SeekBar
+                android:id="@+id/Seekbarr_color"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/normalProgressBar"
                 android:layout_weight="5"/>

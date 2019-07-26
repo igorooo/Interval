@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class AddExerciseFragment : Fragment() {
+class StartIntervalFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
 
@@ -17,17 +17,21 @@ class AddExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_add_exercise, container, false)
-        return view;
+        // Inflate the layout for this fragment
+        var view = inflater.inflate(R.layout.fragment_start_interval, container, false)
+
+        return view
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        /*
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
+        */
     }
 
     override fun onDetach() {
