@@ -1,12 +1,16 @@
 package com.example.intervals
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
+import com.example.intervals.CreateIntervalFragment.OnCreateIntervalInteractionListener
 import com.google.android.material.tabs.TabLayout
 
-class MainActivity : FragmentActivity() {
+class MainActivity : FragmentActivity(),
+                     OnCreateIntervalInteractionListener {
+
 
     private lateinit var mViewPager: ViewPager
     private lateinit var mTabLayout: TabLayout
@@ -33,5 +37,9 @@ class MainActivity : FragmentActivity() {
 
         tabLayout.setupWithViewPager(viewPager)
         viewPager.adapter = sectionPageAdapter
+    }
+
+    override fun onCreateIntervalInteractionListener(intent: Intent): Exercise {
+
     }
 }

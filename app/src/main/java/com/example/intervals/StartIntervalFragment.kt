@@ -13,6 +13,7 @@ class StartIntervalFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

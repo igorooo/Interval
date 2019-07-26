@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10"
+        android:weightSum="11"
         >
 
     <LinearLayout
@@ -148,5 +148,15 @@
 
         >
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/FLoatingButton_add_exercise"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_add_circle"
+            android:layout_gravity="bottom|right"
+            android:layout_weight="1"
+            android:clickable="true"
+            />
 
 </LinearLayout>
