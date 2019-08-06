@@ -27,6 +27,7 @@ class CreateIntervalFragment : Fragment() {
     private lateinit var mRecyclerView_avilable_exercises : RecyclerView
     private lateinit var mRecyclerView_interval_exercises : RecyclerView
     private lateinit var mFloatingButton_add_exercise : FloatingActionButton
+    private lateinit var mExercise: Exercise
 
 
 
@@ -68,10 +69,10 @@ class CreateIntervalFragment : Fragment() {
     }
 
     fun onAddExerciseButtonClick(view : View){
-
+        mExercise = listener!!.onCreateIntervalInteractionListener()
     }
 
     interface OnCreateIntervalInteractionListener {
-        fun onCreateIntervalInteractionListener(intent: Intent):Exercise
+        fun onCreateIntervalInteractionListener():Exercise
     }
 }

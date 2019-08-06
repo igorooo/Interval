@@ -3,10 +3,11 @@ package com.example.intervals
 import android.os.Parcel
 import android.os.Parcelable
 
-class Exercise(val name : String, var exercise_time : Int = 0, var break_time : Int = 0,
-               val chest : Int = 0, val back : Int = 0, val  legs : Int = 0,
-               val abs : Int = 0, val biceps : Int = 0, val triceps : Int = 0,
-               val shoulders : Int = 0, val cardio : Int = 0) : Parcelable {
+class Exercise(
+    val name: String?, var exercise_time: Int = 0, var break_time: Int = 0,
+    val chest: Int = 0, val back: Int = 0, val legs: Int = 0,
+    val abs: Int = 0, val biceps: Int = 0, val triceps: Int = 0,
+    val shoulders: Int = 0, val cardio: Int = 0) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),

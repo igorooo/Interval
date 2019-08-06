@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayout
 class MainActivity : FragmentActivity(),
                      OnCreateIntervalInteractionListener {
 
+    private val REQUEST_CODE = 1
 
     private lateinit var mViewPager: ViewPager
     private lateinit var mTabLayout: TabLayout
@@ -39,7 +40,10 @@ class MainActivity : FragmentActivity(),
         viewPager.adapter = sectionPageAdapter
     }
 
-    override fun onCreateIntervalInteractionListener(intent: Intent): Exercise {
+    override fun onCreateIntervalInteractionListener(): Exercise {
 
+        val intent = Intent(this, AddExerciseActivity::class.java)
+        startActivityForResult(intent, REQUEST_CODE)
+        return Exercise("a");
     }
 }

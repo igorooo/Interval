@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:orientation="vertical"
-             tools:context=".AddExerciseFragment">
+              tools:context=".AddExerciseActivity">
 
     <TextView
             android:layout_width="wrap_content"
@@ -49,25 +49,25 @@
                     android:layout_height="wrap_content">
 
                 <RadioButton
-                        android:id="@+id/chest"
+                        android:id="@+id/RadioButton_chest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/chest"
                         android:textSize="@dimen/listTextSize"/>
                 <RadioButton
-                        android:id="@+id/back"
+                        android:id="@+id/RadioButton_back"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/back"
                         android:textSize="@dimen/listTextSize"/>
                 <RadioButton
-                        android:id="@+id/legs"
+                        android:id="@+id/RadioButton_legs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/legs"
                         android:textSize="@dimen/listTextSize"/>
                 <RadioButton
-                        android:id="@+id/abs"
+                        android:id="@+id/RadioButton_abs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/abs"
@@ -84,25 +84,25 @@
                 android:layout_weight="5">
 
             <RadioButton
-                    android:id="@+id/biceps"
+                    android:id="@+id/RadioButton_biceps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/biceps"
                     android:textSize="@dimen/listTextSize"/>
             <RadioButton
-                    android:id="@+id/triceps"
+                    android:id="@+id/RadioButton_triceps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/triceps"
                     android:textSize="@dimen/listTextSize"/>
             <RadioButton
-                    android:id="@+id/shoulders"
+                    android:id="@+id/RadioButton_shoulders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/shoulders"
                     android:textSize="@dimen/listTextSize"/>
             <RadioButton
-                    android:id="@+id/cardio"
+                    android:id="@+id/RadioButton_cardio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cardio"
@@ -110,7 +110,7 @@
 
         </LinearLayout>
     </LinearLayout>
-    
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 
 
         <SeekBar
-                android:id="@+id/Seekbarr_color"
+                android:id="@+id/SeekBar_color"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/normalProgressBar"
                 android:layout_weight="5"/>
