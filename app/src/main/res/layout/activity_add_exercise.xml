@@ -4,76 +4,83 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".AddExerciseActivity">
+              tools:context=".AddExerciseActivity"
+        >
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_exercise"
             android:textSize="@dimen/headingTextSize"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
     <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spaceHeight"/>
+            android:layout_height="@dimen/spaceHeight"
+            />
 
     <EditText
             android:id="@+id/EditText_exercise_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/bigTextSize"
-            android:hint="@string/exercise_name_hint"/>
-
+            android:hint="@string/exercise_name_hint"
+            />
 
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/affects"
-            android:textSize="@dimen/normalTextSize"/>
+            android:textSize="@dimen/normalTextSize"
+            />
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:weightSum="10"
+            >
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5">
+                android:layout_weight="5"
+                >
 
-            <RadioGroup
+            <RadioButton
+                    android:id="@+id/RadioButton_chest"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="@string/chest"
+                    android:textSize="@dimen/listTextSize"
+                    />
 
-                <RadioButton
-                        android:id="@+id/RadioButton_chest"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/chest"
-                        android:textSize="@dimen/listTextSize"/>
-                <RadioButton
-                        android:id="@+id/RadioButton_back"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/back"
-                        android:textSize="@dimen/listTextSize"/>
-                <RadioButton
-                        android:id="@+id/RadioButton_legs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/legs"
-                        android:textSize="@dimen/listTextSize"/>
-                <RadioButton
-                        android:id="@+id/RadioButton_abs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/abs"
-                        android:textSize="@dimen/listTextSize"/>
+            <RadioButton
+                    android:id="@+id/RadioButton_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:textSize="@dimen/listTextSize"
+                    />
 
-            </RadioGroup>
+            <RadioButton
+                    android:id="@+id/RadioButton_legs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/legs"
+                    android:textSize="@dimen/listTextSize"
+                    />
+
+            <RadioButton
+                    android:id="@+id/RadioButton_abs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abs"
+                    android:textSize="@dimen/listTextSize"
+                    />
 
         </LinearLayout>
 
@@ -81,32 +88,40 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5">
+                android:layout_weight="5"
+                >
 
             <RadioButton
                     android:id="@+id/RadioButton_biceps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/biceps"
-                    android:textSize="@dimen/listTextSize"/>
+                    android:textSize="@dimen/listTextSize"
+                    />
+
             <RadioButton
                     android:id="@+id/RadioButton_triceps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/triceps"
-                    android:textSize="@dimen/listTextSize"/>
+                    android:textSize="@dimen/listTextSize"
+                    />
+
             <RadioButton
                     android:id="@+id/RadioButton_shoulders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/shoulders"
-                    android:textSize="@dimen/listTextSize"/>
+                    android:textSize="@dimen/listTextSize"
+                    />
+
             <RadioButton
                     android:id="@+id/RadioButton_cardio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cardio"
-                    android:textSize="@dimen/listTextSize"/>
+                    android:textSize="@dimen/listTextSize"
+                    />
 
         </LinearLayout>
     </LinearLayout>
@@ -115,7 +130,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:weightSum="10"
+            >
 
         <ImageView
                 android:id="@+id/ImageView_color"
@@ -123,18 +139,19 @@
                 android:src="@drawable/color_img"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"/>
+                android:layout_weight="5"
+                />
 
 
         <SeekBar
                 android:id="@+id/SeekBar_color"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/normalProgressBar"
-                android:layout_weight="5"/>
+                android:layout_weight="5"
+                />
 
 
     </LinearLayout>
-
 
 
     <ImageButton
@@ -142,6 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:background="@drawable/ic_save"/>
+            android:background="@drawable/ic_save"
+            />
 
 </LinearLayout>

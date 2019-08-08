@@ -1,5 +1,7 @@
 package com.example.intervals
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +9,9 @@ import android.view.View
 import android.widget.*
 
 class AddExerciseActivity : AppCompatActivity() {
+
+    private val RETURN_INTENT = "RETURN"
+
     private lateinit var mEdidText_exercise_name : EditText
     private lateinit var mRadioButton_chest: RadioButton
     private lateinit var mRadioButton_back: RadioButton
@@ -27,8 +32,6 @@ class AddExerciseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_exercise)
         initView()
         initListeners()
-
-
     }
 
     fun initView(){
@@ -52,20 +55,45 @@ class AddExerciseActivity : AppCompatActivity() {
 
         mSeekBar_color?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
+                changeColor(p1)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onStopTrackingTouch(p0: SeekBar?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
 
         })
 
+    }
+
+    private fun getExercise():Exercise {
+
+        val exercise = Exercise(mEdidText_exercise_name.text.toString(),
+                                60,
+                                10,
+                                mSeekBar_color.progress,
+                                if (mRadioButton_chest.isChecked) 1 else 0,
+                                if (mRadioButton_back.isChecked) 1 else 0,
+                                if (mRadioButton_legs.isChecked) 1 else 0,
+                                if (mRadioButton_abs.isChecked) 1 else 0,
+                                if (mRadioButton_biceps.isChecked) 1 else 0,
+                                if (mRadioButton_triceps.isChecked) 1 else 0,
+                                if (mRadioButton_shoulders.isChecked) 1 else 0,
+                                if (mRadioButton_cardio.isChecked) 1 else 0)
+
+        return exercise
+    }
+
+    private fun sendExerciseAndFinish() {
+        val retIntent = Intent()
+        retIntent.putExtra(RETURN_INTENT, getExercise())
+        setResult(Activity.RESULT_OK, retIntent)
+        finish()
     }
 
     fun changeColor(progres : Int){

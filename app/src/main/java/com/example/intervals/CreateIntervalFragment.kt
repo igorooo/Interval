@@ -37,6 +37,7 @@ class CreateIntervalFragment : Fragment() {
     ): View? {
         var view = inflater.inflate(R.layout.fragment_create_interval, container, false)
         initView(view)
+        initListeners()
 
         return view
     }
@@ -57,7 +58,7 @@ class CreateIntervalFragment : Fragment() {
         listener = null
     }
 
-    fun initView(view : View){
+    private fun initView(view : View){
         mTextView_exercise_time = view.findViewById(R.id.TextView_exercise_time)
         mTextView_break_time = view.findViewById(R.id.TextView_break_time)
         mSeekBar_exercise_time = view.findViewById(R.id.SeekBar_exercise_time)
@@ -68,11 +69,19 @@ class CreateIntervalFragment : Fragment() {
         mFloatingButton_add_exercise = view.findViewById(R.id.FLoatingButton_add_exercise)
     }
 
-    fun onAddExerciseButtonClick(view : View){
-        mExercise = listener!!.onCreateIntervalInteractionListener()
+    private fun initListeners(){
+        mFloatingButton_add_exercise.setOnClickListener{v -> onAddExerciseButtonClick()}
+    }
+
+    private fun onAddExerciseButtonClick(){
+        listener!!.onCreateIntervalInteractionListener()
+    }
+
+    fun captureExerciseFromMainActivity(exercise: Exercise?){
+        // TODO shared prefs array with exercises
     }
 
     interface OnCreateIntervalInteractionListener {
-        fun onCreateIntervalInteractionListener():Exercise
+        fun onCreateIntervalInteractionListener()
     }
 }

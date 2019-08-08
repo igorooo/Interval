@@ -157,6 +157,7 @@
             android:layout_gravity="bottom|right"
             android:layout_weight="1"
             android:clickable="true"
+            android:focusable="true"
             />
 
 </LinearLayout>
