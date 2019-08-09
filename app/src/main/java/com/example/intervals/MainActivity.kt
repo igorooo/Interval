@@ -3,7 +3,6 @@ package com.example.intervals
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.intervals.CreateIntervalFragment.OnCreateIntervalInteractionListener
@@ -24,8 +23,8 @@ class MainActivity : FragmentActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mViewPager = findViewById<ViewPager>(R.id.ViewPager_pager);
-        mTabLayout = findViewById<TabLayout>(R.id.TabLayout_tabs);
+        mViewPager = findViewById(R.id.ViewPager_pager);
+        mTabLayout = findViewById(R.id.TabLayout_tabs);
         mSectionPageAdapter = SectionPageAdapter(supportFragmentManager)
 
         setupViewPager(mViewPager, mSectionPageAdapter, mTabLayout)
@@ -53,6 +52,6 @@ class MainActivity : FragmentActivity(),
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             mCreateIntervalFragment.captureExerciseFromMainActivity(data!!.getParcelableExtra(RETURN_INTENT))
         }
-
     }
+
 }
