@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.Image
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class CreateIntervalFragment : Fragment() {
+class CreateIntervalFragment(val storage: Storage) : Fragment() {
+    private val TAG = "CreateIntervalFragment"
+
     private var listener: OnCreateIntervalInteractionListener? = null
     private lateinit var mTextView_exercise_time : TextView
     private lateinit var mTextView_break_time : TextView
@@ -27,7 +30,7 @@ class CreateIntervalFragment : Fragment() {
     private lateinit var mRecyclerView_avilable_exercises : RecyclerView
     private lateinit var mRecyclerView_interval_exercises : RecyclerView
     private lateinit var mFloatingButton_add_exercise : FloatingActionButton
-    private lateinit var mExercise: Exercise
+    private lateinit var mArrayOfExercises: ArrayList<Exercise>
 
 
 
@@ -35,14 +38,17 @@ class CreateIntervalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "onCreateView")
         var view = inflater.inflate(R.layout.fragment_create_interval, container, false)
         initView(view)
         initListeners()
+        mArrayOfExercises = storage.getAll(MainActivity.STORAGE_POS_KEY)
 
         return view
     }
 
     override fun onAttach(context: Context) {
+        Log.d(TAG, "onAttach")
         super.onAttach(context)
 
         if (context is OnCreateIntervalInteractionListener) {
@@ -74,11 +80,13 @@ class CreateIntervalFragment : Fragment() {
     }
 
     private fun onAddExerciseButtonClick(){
+        Log.d(TAG, "onAddExerciseButtonClick")
         listener!!.onCreateIntervalInteractionListener()
     }
 
-    fun captureExerciseFromMainActivity(exercise: Exercise?){
-        // TODO shared prefs array with exercises
+    fun notifyNewExerciseAdded(){
+        Log.d(TAG, "notifyNewExerciseAdded")
+        mArrayOfExercises = storage.getAll(MainActivity.STORAGE_POS_KEY)
     }
 
     interface OnCreateIntervalInteractionListener {

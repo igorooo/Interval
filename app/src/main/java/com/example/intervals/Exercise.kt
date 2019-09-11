@@ -53,6 +53,4 @@ class Exercise (
             return arrayOfNulls(size)
         }
     }
-
-
 }

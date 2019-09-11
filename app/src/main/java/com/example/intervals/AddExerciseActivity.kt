@@ -5,11 +5,12 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 
 class AddExerciseActivity : AppCompatActivity() {
-
+    private val TAG = "AddExerciseActivity"
     private val RETURN_INTENT = "RETURN"
 
     private lateinit var mEdidText_exercise_name : EditText
@@ -28,6 +29,7 @@ class AddExerciseActivity : AppCompatActivity() {
     private var mHSV_COLOR = floatArrayOf(0f, 1f, 1f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_exercise)
         initView()
@@ -72,6 +74,7 @@ class AddExerciseActivity : AppCompatActivity() {
     }
 
     private fun getExercise():Exercise {
+        Log.d(TAG, "getExercise")
 
         val exercise = Exercise(mEdidText_exercise_name.text.toString(),
                                 60,
@@ -90,6 +93,7 @@ class AddExerciseActivity : AppCompatActivity() {
     }
 
     private fun sendExerciseAndFinish() {
+        Log.d(TAG, "sendExerciseAndFinish")
         val retIntent = Intent()
         retIntent.putExtra(RETURN_INTENT, getExercise())
         setResult(Activity.RESULT_OK, retIntent)
