@@ -1,20 +1,15 @@
 package com.example.intervals
 
 import android.content.Context
-import android.content.Intent
-import android.media.Image
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsSeekBar
-import android.widget.ImageButton
-import android.widget.SeekBar
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.*
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -22,15 +17,22 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     private val TAG = "CreateIntervalFragment"
 
     private var listener: OnCreateIntervalInteractionListener? = null
+
+    private lateinit var mFrameLayout_active_exercise: FrameLayout
+    private lateinit var mTextView_active_exercise: TextView
     private lateinit var mTextView_exercise_time : TextView
     private lateinit var mTextView_break_time : TextView
     private lateinit var mSeekBar_exercise_time: SeekBar
     private lateinit var mSeekBar_break_time: SeekBar
-    private lateinit var mButton_submit_time : ImageButton
-    private lateinit var mRecyclerView_avilable_exercises : RecyclerView
-    private lateinit var mRecyclerView_interval_exercises : RecyclerView
+    private lateinit var mButton_submit_exercise : ImageButton
+    private lateinit var mListView_avilable_exercises : ListView
+    private lateinit var mListView_interval_exercises : ListView
     private lateinit var mFloatingButton_add_exercise : FloatingActionButton
     private lateinit var mArrayOfExercises: ArrayList<Exercise>
+    private lateinit var mArrayOfIntervalExercises: ArrayList<Exercise>
+    private lateinit var mActiveExercise: Exercise
+    private lateinit var mListAdapter_available_exercises: ListAdapter
+    private lateinit var mListAdapter_interval_exercises: IntervalListAdapter
 
 
 
@@ -43,6 +45,11 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         initView(view)
         initListeners()
         mArrayOfExercises = storage.getAll(MainActivity.STORAGE_POS_KEY)
+        mArrayOfIntervalExercises = ArrayList()
+        mListAdapter_available_exercises = ListAdapter()
+        mListAdapter_interval_exercises = IntervalListAdapter()
+        mListView_avilable_exercises.adapter = mListAdapter_available_exercises
+        mListView_interval_exercises.adapter = mListAdapter_interval_exercises
 
         return view
     }
@@ -65,18 +72,38 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     }
 
     private fun initView(view : View){
+        mFrameLayout_active_exercise = view.findViewById(R.id.FrameLayout_display_active_exercise)
+        mTextView_active_exercise = view.findViewById(R.id.TextView_active_exercise)
         mTextView_exercise_time = view.findViewById(R.id.TextView_exercise_time)
         mTextView_break_time = view.findViewById(R.id.TextView_break_time)
         mSeekBar_exercise_time = view.findViewById(R.id.SeekBar_exercise_time)
         mSeekBar_break_time = view.findViewById(R.id.SeekBar_break_time)
-        mButton_submit_time = view.findViewById(R.id.Button_submit_time)
-        mRecyclerView_avilable_exercises = view.findViewById(R.id.RecyclerView_avilable_exercises)
-        mRecyclerView_interval_exercises = view.findViewById(R.id.RecyclerView_interval_exercises)
+        mButton_submit_exercise = view.findViewById(R.id.Button_submit_exercise)
+        mListView_avilable_exercises = view.findViewById(R.id.ListView_avilable_exercises)
+        mListView_interval_exercises = view.findViewById(R.id.ListView_interval_exercises)
         mFloatingButton_add_exercise = view.findViewById(R.id.FLoatingButton_add_exercise)
     }
 
     private fun initListeners(){
         mFloatingButton_add_exercise.setOnClickListener{v -> onAddExerciseButtonClick()}
+        mButton_submit_exercise.setOnClickListener{v -> onSubmitExerciseButtonClick()}
+
+        mListView_avilable_exercises.onItemClickListener = object :
+            OnItemClickListener {
+            override fun onItemClick(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
+                mActiveExercise = mArrayOfExercises.get(position)
+                notifyNewActiveExercise()
+            }
+        }
+    }
+
+    private fun notifyNewActiveExercise() {
+        mTextView_active_exercise.setText(mActiveExercise.name)
+    }
+
+    private fun onSubmitExerciseButtonClick() {
+        mArrayOfIntervalExercises.add(mActiveExercise)
+        mListAdapter_interval_exercises.notifyDataSetChanged()
     }
 
     private fun onAddExerciseButtonClick(){
@@ -87,9 +114,64 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     fun notifyNewExerciseAdded(){
         Log.d(TAG, "notifyNewExerciseAdded")
         mArrayOfExercises = storage.getAll(MainActivity.STORAGE_POS_KEY)
+        mListAdapter_available_exercises.notifyDataSetChanged()
     }
 
     interface OnCreateIntervalInteractionListener {
         fun onCreateIntervalInteractionListener()
+    }
+
+    inner class ListAdapter : BaseAdapter() {
+        override fun getView(position: Int,convertView: View?, viewGroup: ViewGroup?): View {
+            var tempView = convertView
+            if(convertView == null) {
+                tempView = layoutInflater.inflate(R.layout.exercise_position_list, viewGroup, false)
+            }
+
+            val exercise = mArrayOfExercises.get(position)
+
+            tempView!!.findViewById<TextView>(R.id.TextView_exercies_name_list).setText(exercise.name)
+
+            return tempView
+        }
+
+        override fun getItem(p0: Int): Any {
+            return mArrayOfExercises.get(p0)
+        }
+
+        override fun getItemId(p0: Int): Long {
+            return p0.toLong()
+        }
+
+        override fun getCount(): Int {
+            return mArrayOfExercises.size
+        }
+    }
+
+    inner class IntervalListAdapter : BaseAdapter() {
+        override fun getView(position: Int,convertView: View?, viewGroup: ViewGroup?): View {
+            var tempView = convertView
+            if(convertView == null) {
+                tempView = layoutInflater.inflate(R.layout.exercise_position_list, viewGroup, false)
+            }
+
+            val exercise = mArrayOfIntervalExercises.get(position)
+
+            tempView!!.findViewById<TextView>(R.id.TextView_exercies_name_list).setText(exercise.name)
+
+            return tempView
+        }
+
+        override fun getItem(p0: Int): Any {
+            return mArrayOfIntervalExercises.get(p0)
+        }
+
+        override fun getItemId(p0: Int): Long {
+            return p0.toLong()
+        }
+
+        override fun getCount(): Int {
+            return mArrayOfIntervalExercises.size
+        }
     }
 }

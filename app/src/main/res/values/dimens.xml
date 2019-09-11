@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="listTextSize">20dp</dimen>
+    <dimen name="listTextSize">20sp</dimen>
     <dimen name="headingTextSize">40dp</dimen>
-    <dimen name="bigTextSize">30dp</dimen>
+    <dimen name="bigTextSize">30sp</dimen>
     <dimen name="spaceHeight">40dp</dimen>
     <dimen name="smallSpaceHeight">20dp</dimen>
-    <dimen name="normalTextSize">25dp</dimen>
+    <dimen name="normalTextSize">25sp</dimen>
     <dimen name="normalProgressBar">120dp</dimen>
 </resources>
