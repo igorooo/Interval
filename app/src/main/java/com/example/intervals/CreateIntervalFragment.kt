@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.AdapterView.OnItemLongClickListener
+import com.akaita.android.circularseekbar.CircularSeekBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -22,8 +24,8 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     private lateinit var mTextView_active_exercise: TextView
     private lateinit var mTextView_exercise_time : TextView
     private lateinit var mTextView_break_time : TextView
-    private lateinit var mSeekBar_exercise_time: SeekBar
-    private lateinit var mSeekBar_break_time: SeekBar
+    private lateinit var mSeekBar_exercise_time: CircularSeekBar
+    private lateinit var mSeekBar_break_time: CircularSeekBar
     private lateinit var mButton_submit_exercise : ImageButton
     private lateinit var mListView_avilable_exercises : ListView
     private lateinit var mListView_interval_exercises : ListView
@@ -63,7 +65,6 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         } else {
             throw RuntimeException(context.toString() + " must implement OnCreateIntervalInteractionListener")
         }
-
     }
 
     override fun onDetach() {
@@ -78,7 +79,6 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         mTextView_break_time = view.findViewById(R.id.TextView_break_time)
         mSeekBar_exercise_time = view.findViewById(R.id.SeekBar_exercise_time)
         mSeekBar_break_time = view.findViewById(R.id.SeekBar_break_time)
-        mButton_submit_exercise = view.findViewById(R.id.Button_submit_exercise)
         mListView_avilable_exercises = view.findViewById(R.id.ListView_avilable_exercises)
         mListView_interval_exercises = view.findViewById(R.id.ListView_interval_exercises)
         mFloatingButton_add_exercise = view.findViewById(R.id.FLoatingButton_add_exercise)
@@ -86,13 +86,20 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
 
     private fun initListeners(){
         mFloatingButton_add_exercise.setOnClickListener{v -> onAddExerciseButtonClick()}
-        mButton_submit_exercise.setOnClickListener{v -> onSubmitExerciseButtonClick()}
 
-        mListView_avilable_exercises.onItemClickListener = object :
-            OnItemClickListener {
+        mListView_avilable_exercises.onItemClickListener = object : OnItemClickListener {
             override fun onItemClick(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
                 mActiveExercise = mArrayOfExercises.get(position)
                 notifyNewActiveExercise()
+            }
+        }
+
+        mListView_avilable_exercises.onItemLongClickListener = object : OnItemLongClickListener {
+            override fun onItemLongClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long): Boolean {
+                mActiveExercise = mArrayOfExercises.get(position)
+                notifyNewActiveExercise()
+                onSubmitExerciseButtonClick()
+                return true
             }
         }
     }
@@ -101,6 +108,7 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         mTextView_active_exercise.setText(mActiveExercise.name)
     }
 
+    //name is a bit obsolate
     private fun onSubmitExerciseButtonClick() {
         mArrayOfIntervalExercises.add(mActiveExercise)
         mListAdapter_interval_exercises.notifyDataSetChanged()

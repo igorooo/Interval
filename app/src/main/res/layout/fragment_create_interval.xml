@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:weightSum="11"
         >
@@ -12,23 +13,14 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:orientation="vertical"
-            android:weightSum="12"
+            android:weightSum="10"
             >
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="center"
-                android:text="@string/create_interval"
-                android:textSize="@dimen/headingTextSize"
-                />
 
         <FrameLayout
                 android:id="@+id/FrameLayout_display_active_exercise"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 >
 
             <TextView
@@ -44,7 +36,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="7"
                 android:weightSum="10"
                 android:orientation="horizontal"
                 >
@@ -59,16 +51,24 @@
 
                 <TextView
                         android:id="@+id/TextView_exercise_time"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="8"
+                        android:layout_weight="2"
+                        android:text="@string/exercise_time"
+                        android:layout_gravity="center"
                         />
 
-                <SeekBar
+                <com.akaita.android.circularseekbar.CircularSeekBar
                         android:id="@+id/SeekBar_exercise_time"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="8"
+                        app:min="10"
+                        app:max="600"
+                        app:progressTextSize="20"
+                        app:progressTextColor="@color/colorBlack"
+                        app:ringColor="@color/colorRed"
+                        app:ringWidth="0.3"
                         />
 
             </LinearLayout>
@@ -84,31 +84,28 @@
 
                 <TextView
                         android:id="@+id/TextView_break_time"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="8"
+                        android:layout_weight="2"
+                        android:text="@string/break_time"
+                        android:layout_gravity="center"
                         />
 
-                <SeekBar
+                <com.akaita.android.circularseekbar.CircularSeekBar
                         android:id="@+id/SeekBar_break_time"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="8"
+                        app:min="10"
+                        app:max="600"
+                        app:progressTextSize="20"
+                        app:progressTextColor="@color/colorBlack"
+                        app:ringColor="@color/colorBlue"
+                        app:ringWidth="0.3"
                         />
 
             </LinearLayout>
         </LinearLayout>
-
-        <ImageButton
-                android:id="@+id/Button_submit_exercise"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_submit"
-                />
-
-
     </LinearLayout>
 
 
