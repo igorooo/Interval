@@ -19,24 +19,21 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     private val TAG = "CreateIntervalFragment"
 
     private var listener: OnCreateIntervalInteractionListener? = null
+    private var mActiveExercise: Exercise? = null
 
     private lateinit var mFrameLayout_active_exercise: FrameLayout
     private lateinit var mTextView_active_exercise: TextView
-    private lateinit var mTextView_exercise_time : TextView
-    private lateinit var mTextView_break_time : TextView
+    private lateinit var mTextView_exercise_time: TextView
+    private lateinit var mTextView_break_time: TextView
     private lateinit var mSeekBar_exercise_time: CircularSeekBar
     private lateinit var mSeekBar_break_time: CircularSeekBar
-    private lateinit var mButton_submit_exercise : ImageButton
-    private lateinit var mListView_avilable_exercises : ListView
-    private lateinit var mListView_interval_exercises : ListView
-    private lateinit var mFloatingButton_add_exercise : FloatingActionButton
+    private lateinit var mListView_avilable_exercises: ListView
+    private lateinit var mListView_interval_exercises: ListView
+    private lateinit var mFloatingButton_add_exercise: FloatingActionButton
     private lateinit var mArrayOfExercises: ArrayList<Exercise>
     private lateinit var mArrayOfIntervalExercises: ArrayList<Exercise>
-    private lateinit var mActiveExercise: Exercise
     private lateinit var mListAdapter_available_exercises: ListAdapter
     private lateinit var mListAdapter_interval_exercises: IntervalListAdapter
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +69,7 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         listener = null
     }
 
-    private fun initView(view : View){
+    private fun initView(view: View) {
         mFrameLayout_active_exercise = view.findViewById(R.id.FrameLayout_display_active_exercise)
         mTextView_active_exercise = view.findViewById(R.id.TextView_active_exercise)
         mTextView_exercise_time = view.findViewById(R.id.TextView_exercise_time)
@@ -84,8 +81,8 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
         mFloatingButton_add_exercise = view.findViewById(R.id.FLoatingButton_add_exercise)
     }
 
-    private fun initListeners(){
-        mFloatingButton_add_exercise.setOnClickListener{v -> onAddExerciseButtonClick()}
+    private fun initListeners() {
+        mFloatingButton_add_exercise.setOnClickListener { v -> onAddExerciseButtonClick() }
 
         mListView_avilable_exercises.onItemClickListener = object : OnItemClickListener {
             override fun onItemClick(p0: AdapterView<*>?, view: View?, position: Int, p3: Long) {
@@ -102,24 +99,64 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
                 return true
             }
         }
+
+        mListView_interval_exercises.onItemLongClickListener = object : OnItemLongClickListener {
+            override fun onItemLongClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long): Boolean {
+                mArrayOfIntervalExercises.removeAt(position)
+                mListAdapter_interval_exercises.notifyDataSetChanged()
+                return true
+            }
+        }
+
+        mSeekBar_exercise_time.setOnCircularSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: CircularSeekBar?, progress: Float, fromUser: Boolean) {
+                mActiveExercise?.exercise_time = progress.toInt()
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
+
+        mSeekBar_break_time.setOnCircularSeekBarChangeListener(object :
+            CircularSeekBar.OnCircularSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: CircularSeekBar?, progress: Float, fromUser: Boolean) {
+                mActiveExercise?.break_time = progress.toInt()
+            }
+
+            override fun onStartTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onStopTrackingTouch(seekBar: CircularSeekBar?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     private fun notifyNewActiveExercise() {
-        mTextView_active_exercise.setText(mActiveExercise.name)
+        mTextView_active_exercise.setText(mActiveExercise?.name)
     }
 
     //name is a bit obsolate
     private fun onSubmitExerciseButtonClick() {
-        mArrayOfIntervalExercises.add(mActiveExercise)
+        mArrayOfIntervalExercises.add(mActiveExercise!!.copy())
         mListAdapter_interval_exercises.notifyDataSetChanged()
     }
 
-    private fun onAddExerciseButtonClick(){
+    private fun onAddExerciseButtonClick() {
         Log.d(TAG, "onAddExerciseButtonClick")
         listener!!.onCreateIntervalInteractionListener()
     }
 
-    fun notifyNewExerciseAdded(){
+    fun notifyNewExerciseAdded() {
         Log.d(TAG, "notifyNewExerciseAdded")
         mArrayOfExercises = storage.getAll(MainActivity.STORAGE_POS_KEY)
         mListAdapter_available_exercises.notifyDataSetChanged()
@@ -130,9 +167,9 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     }
 
     inner class ListAdapter : BaseAdapter() {
-        override fun getView(position: Int,convertView: View?, viewGroup: ViewGroup?): View {
+        override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
             var tempView = convertView
-            if(convertView == null) {
+            if (convertView == null) {
                 tempView = layoutInflater.inflate(R.layout.exercise_position_list, viewGroup, false)
             }
 
@@ -157,9 +194,9 @@ class CreateIntervalFragment(val storage: Storage) : Fragment() {
     }
 
     inner class IntervalListAdapter : BaseAdapter() {
-        override fun getView(position: Int,convertView: View?, viewGroup: ViewGroup?): View {
+        override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
             var tempView = convertView
-            if(convertView == null) {
+            if (convertView == null) {
                 tempView = layoutInflater.inflate(R.layout.exercise_position_list, viewGroup, false)
             }
 
